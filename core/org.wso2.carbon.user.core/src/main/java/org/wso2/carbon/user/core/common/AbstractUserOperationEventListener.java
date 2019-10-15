@@ -40,35 +40,32 @@ public class AbstractUserOperationEventListener implements UniqueIDUserOperation
     }
 
     @Override
-    public boolean doPreAuthenticate(String userName, Object credential,
-                                     UserStoreManager userStoreManager) throws UserStoreException {
-        return true;
-    }
-
-    @Override
-    public boolean doPostAuthenticate(String userName, boolean authenticated,
-                                      UserStoreManager userStoreManager) throws UserStoreException {
-        return true;
-    }
-
-    @Override
-    public boolean doPreAddUser(String userName, Object credential, String[] roleList,
-                                Map<String, String> claims, String profile, UserStoreManager userStoreManager)
+    public boolean doPreAuthenticate(String userName, Object credential, UserStoreManager userStoreManager)
             throws UserStoreException {
         return true;
     }
 
     @Override
-    public boolean doPostAddUser(String userName, Object credential, String[] roleList,
-                                 Map<String, String> claims, String profile,
-                                 UserStoreManager userStoreManager)
+    public boolean doPostAuthenticate(String userName, boolean authenticated, UserStoreManager userStoreManager)
             throws UserStoreException {
+        return true;
+    }
+
+    @Override
+    public boolean doPreAddUser(String userName, Object credential, String[] roleList, Map<String, String> claims,
+            String profile, UserStoreManager userStoreManager) throws UserStoreException {
+        return true;
+    }
+
+    @Override
+    public boolean doPostAddUser(String userName, Object credential, String[] roleList, Map<String, String> claims,
+            String profile, UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
     @Override
     public boolean doPreUpdateCredential(String userName, Object newCredential, Object oldCredential,
-                                         UserStoreManager userStoreManager) throws UserStoreException {
+            UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
@@ -80,32 +77,29 @@ public class AbstractUserOperationEventListener implements UniqueIDUserOperation
 
     @Override
     public boolean doPreUpdateCredentialByAdmin(String userName, Object newCredential,
-                                                UserStoreManager userStoreManager) throws UserStoreException {
+            UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
     @Override
-    public boolean doPostUpdateCredentialByAdmin(String userName,
-                                                 Object credential,
-                                                 UserStoreManager userStoreManager) throws UserStoreException {
+    public boolean doPostUpdateCredentialByAdmin(String userName, Object credential, UserStoreManager userStoreManager)
+            throws UserStoreException {
         return true;
     }
 
     @Override
-    public boolean doPreDeleteUser(String userName,
-                                   UserStoreManager userStoreManager) throws UserStoreException {
+    public boolean doPreDeleteUser(String userName, UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
     @Override
-    public boolean doPostDeleteUser(String userName,
-                                    UserStoreManager userStoreManager) throws UserStoreException {
+    public boolean doPostDeleteUser(String userName, UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
     @Override
-    public boolean doPreSetUserClaimValue(String userName, String claimURI, String claimValue,
-                                          String profileName, UserStoreManager userStoreManager) throws UserStoreException {
+    public boolean doPreSetUserClaimValue(String userName, String claimURI, String claimValue, String profileName,
+            UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
@@ -116,21 +110,20 @@ public class AbstractUserOperationEventListener implements UniqueIDUserOperation
     }
 
     @Override
-    public boolean doPreSetUserClaimValues(String userName, Map<String, String> claims,
-                                           String profileName, UserStoreManager userStoreManager) throws UserStoreException {
+    public boolean doPreSetUserClaimValues(String userName, Map<String, String> claims, String profileName,
+            UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
     @Override
-    public boolean doPostSetUserClaimValues(String userName, Map<String, String> claims,
-                                            String profileName, UserStoreManager userStoreManager)
-            throws UserStoreException {
+    public boolean doPostSetUserClaimValues(String userName, Map<String, String> claims, String profileName,
+            UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
     @Override
     public boolean doPreDeleteUserClaimValues(String userName, String[] claims, String profileName,
-                                              UserStoreManager userStoreManager) throws UserStoreException {
+            UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
@@ -142,7 +135,7 @@ public class AbstractUserOperationEventListener implements UniqueIDUserOperation
 
     @Override
     public boolean doPreDeleteUserClaimValue(String userName, String claimURI, String profileName,
-                                             UserStoreManager userStoreManager) throws UserStoreException {
+            UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
@@ -163,7 +156,7 @@ public class AbstractUserOperationEventListener implements UniqueIDUserOperation
      * @throws org.wso2.carbon.user.core.UserStoreException
      */
     public boolean doPreAddRole(String roleName, String[] userList, Permission[] permissions,
-                                UserStoreManager userStoreManager) throws UserStoreException {
+            UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
@@ -178,7 +171,7 @@ public class AbstractUserOperationEventListener implements UniqueIDUserOperation
      * @throws org.wso2.carbon.user.core.UserStoreException
      */
     public boolean doPostAddRole(String roleName, String[] userList, Permission[] permissions,
-                                 UserStoreManager userStoreManager) throws UserStoreException {
+            UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
@@ -186,7 +179,7 @@ public class AbstractUserOperationEventListener implements UniqueIDUserOperation
      * Defines any additional actions before adding an internal role.
      *
      * @param roleName         Internal Role Name.
-     * @param userIDs         List of users IDs.
+     * @param userIDs          List of users IDs.
      * @param permissions      permissions.
      * @param userStoreManager user store manager.
      * @throws UserStoreException UserStoreException.
@@ -201,7 +194,7 @@ public class AbstractUserOperationEventListener implements UniqueIDUserOperation
      * Defines any additional actions after adding an internal role.
      *
      * @param roleName         Internal Role Name.
-     * @param userIDs         List of users IDs.
+     * @param userIDs          List of users IDs.
      * @param permissions      permissions
      * @param userStoreManager user store manager.
      * @throws UserStoreException UserStoreException
@@ -220,8 +213,7 @@ public class AbstractUserOperationEventListener implements UniqueIDUserOperation
      * @return
      * @throws org.wso2.carbon.user.core.UserStoreException
      */
-    public boolean doPreDeleteRole(String roleName, UserStoreManager userStoreManager)
-            throws UserStoreException {
+    public boolean doPreDeleteRole(String roleName, UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
@@ -233,8 +225,7 @@ public class AbstractUserOperationEventListener implements UniqueIDUserOperation
      * @return
      * @throws org.wso2.carbon.user.core.UserStoreException
      */
-    public boolean doPostDeleteRole(String roleName, UserStoreManager userStoreManager)
-            throws UserStoreException {
+    public boolean doPostDeleteRole(String roleName, UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
@@ -246,8 +237,7 @@ public class AbstractUserOperationEventListener implements UniqueIDUserOperation
      * @return
      * @throws org.wso2.carbon.user.core.UserStoreException
      */
-    public boolean doPreUpdateRoleName(String roleName, String newRoleName,
-                                       UserStoreManager userStoreManager)
+    public boolean doPreUpdateRoleName(String roleName, String newRoleName, UserStoreManager userStoreManager)
             throws UserStoreException {
         return true;
     }
@@ -260,8 +250,7 @@ public class AbstractUserOperationEventListener implements UniqueIDUserOperation
      * @return
      * @throws org.wso2.carbon.user.core.UserStoreException
      */
-    public boolean doPostUpdateRoleName(String roleName, String newRoleName,
-                                        UserStoreManager userStoreManager)
+    public boolean doPostUpdateRoleName(String roleName, String newRoleName, UserStoreManager userStoreManager)
             throws UserStoreException {
         return true;
     }
@@ -275,9 +264,8 @@ public class AbstractUserOperationEventListener implements UniqueIDUserOperation
      * @return
      * @throws org.wso2.carbon.user.core.UserStoreException
      */
-    public boolean doPreUpdateUserListOfRole(String roleName, String[] deletedUsers,
-                                             String[] newUsers, UserStoreManager userStoreManager)
-            throws UserStoreException {
+    public boolean doPreUpdateUserListOfRole(String roleName, String[] deletedUsers, String[] newUsers,
+            UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
@@ -290,9 +278,8 @@ public class AbstractUserOperationEventListener implements UniqueIDUserOperation
      * @return
      * @throws org.wso2.carbon.user.core.UserStoreException
      */
-    public boolean doPostUpdateUserListOfRole(String roleName, String[] deletedUsers,
-                                              String[] newUsers, UserStoreManager userStoreManager)
-            throws UserStoreException {
+    public boolean doPostUpdateUserListOfRole(String roleName, String[] deletedUsers, String[] newUsers,
+            UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
@@ -306,9 +293,8 @@ public class AbstractUserOperationEventListener implements UniqueIDUserOperation
      * @return
      * @throws org.wso2.carbon.user.core.UserStoreException
      */
-    public boolean doPreUpdateRoleListOfUser(String userName, String[] deletedRoles,
-                                             String[] newRoles, UserStoreManager userStoreManager)
-            throws UserStoreException {
+    public boolean doPreUpdateRoleListOfUser(String userName, String[] deletedRoles, String[] newRoles,
+            UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
@@ -322,135 +308,74 @@ public class AbstractUserOperationEventListener implements UniqueIDUserOperation
      * @return
      * @throws org.wso2.carbon.user.core.UserStoreException
      */
-    public boolean doPostUpdateRoleListOfUser(String userName, String[] deletedRoles,
-                                              String[] newRoles, UserStoreManager userStoreManager)
-            throws UserStoreException {
+    public boolean doPostUpdateRoleListOfUser(String userName, String[] deletedRoles, String[] newRoles,
+            UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
+    @Override
     public boolean doPreGetUserClaimValueWithID(String userID, String claim, String profileName,
             UserStoreManager userStoreManager) throws UserStoreException {
 
         return true;
     }
 
+    @Override
     public boolean doPreGetUserClaimValuesWithID(String userID, String[] claims, String profileName,
             Map<String, String> claimMap, UserStoreManager userStoreManager) throws UserStoreException {
 
         return true;
     }
 
+    @Override
     public boolean doPostGetUserClaimValueWithID(String userID, String claim, List<String> claimValue,
             String profileName, UserStoreManager userStoreManager) throws UserStoreException {
 
         return true;
     }
 
+    @Override
     public boolean doPostGetUserClaimValuesWithID(String userID, String[] claims, String profileName,
             Map<String, String> claimMap, UserStoreManager userStoreManager) throws UserStoreException {
 
         return true;
     }
 
-    /**
-     * Pre listener for the get user list method.
-     * @param claimUri Claim URI.
-     * @param claimValue Value of the given claim URI.
-     * @param returnUsersList List of users that this listiner will return.
-     * @param userStoreManager User store manager.
-     * @return False if error.
-     * @throws UserStoreException User Store Exception.
-     */
+    @Override
     public boolean doPreGetUserListWithID(String claimUri, String claimValue, final List<User> returnUsersList,
             UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
-    /**
-     * Pre listener for the get paginated  conditional user list method.
-     *
-     * @param condition        condition.
-     * @param domain           user store domain.
-     * @param profileName      profile name.
-     * @param limit            number of search results.
-     * @param offset           start index of the search.
-     * @param sortBy           sort By attribute
-     * @param sortOrder        sort order.
-     * @param userStoreManager userStoreManager.
-     * @throws UserStoreException UserStoreException
-     */
+    @Override
     public boolean doPreGetUserListWithID(Condition condition, String domain, String profileName, int limit, int offset,
             String sortBy, String sortOrder, UserStoreManager userStoreManager) throws UserStoreException {
 
         return true;
     }
 
-    /**
-     * Pre listener for the get paginated user list method.
-     *
-     * @param claimUri         Claim URI.
-     * @param claimValue       Value of the given claim URI.
-     * @param limit            No of search results.
-     * @param offset           Start index of the search.
-     * @param returnUsersList  List of users that this listener will return.
-     * @param userStoreManager User store manager.
-     * @return False if error.
-     * @throws UserStoreException User Store Exception.
-     */
+    @Override
     public boolean doPreGetUserListWithID(String claimUri, String claimValue, int limit, int offset,
             final List<User> returnUsersList, UserStoreManager userStoreManager) throws UserStoreException {
 
         return true;
     }
 
-    /**
-     * Post listener for the get user list method.
-     *
-     * @param claimUri         Claim URI.
-     * @param claimValue       Value of the given claim URI.
-     * @param returnValues     Values to be returned.
-     * @param userStoreManager User store manager.
-     * @return False if error.
-     * @throws UserStoreException User Store Exception.
-     */
+    @Override
     public boolean doPostGetUserListWithID(String claimUri, String claimValue, final List<User> returnValues,
             UserStoreManager userStoreManager) throws UserStoreException {
 
         return true;
     }
 
-    /**
-     * Post listener for the get user list method.
-     *
-     * @param claimUri         Claim URI.
-     * @param claimValue       Value of the given claim URI.
-     * @param returnValues     Values to be returned.
-     * @param limit            No of search results.
-     * @param offset           Start index of the search.
-     * @param userStoreManager User store manager.
-     * @return False if error.
-     * @throws UserStoreException User Store Exception.
-     */
-    public boolean doPostGetUserListWithID(String claimUri, String claimValue, final List<User> returnValues,
-            int limit, int offset, UserStoreManager userStoreManager) throws UserStoreException {
+    @Override
+    public boolean doPostGetUserListWithID(String claimUri, String claimValue, final List<User> returnValues, int limit,
+            int offset, UserStoreManager userStoreManager) throws UserStoreException {
 
         return true;
     }
 
-    /**
-     * Post listener for the get user conditional list method.
-     *
-     * @param condition        condition.
-     * @param domain           user store domain.
-     * @param profileName      profile name.
-     * @param limit            number of search results.
-     * @param offset           start index of the search.
-     * @param sortBy           sort by attribute.
-     * @param sortOrder        sort order.
-     * @param userStoreManager user store manager.
-     * @param users            Filtered user list
-     * @throws UserStoreException UserStoreException
-     */
+    @Override
     public boolean doPostGetUserListWithID(Condition condition, String domain, String profileName, int limit,
             int offset, String sortBy, String sortOrder, String[] users, UserStoreManager userStoreManager)
             throws UserStoreException {
@@ -458,79 +383,34 @@ public class AbstractUserOperationEventListener implements UniqueIDUserOperation
         return true;
     }
 
-    /**
-     * Post listener for the get paginated user list method.
-     *
-     * @param claimUri         Claim URI.
-     * @param claimValue       Value of the given claim URI.
-     * @param returnValues     Values to be returned.
-     * @param userStoreManager User store manager.
-     * @return False if error.
-     * @throws UserStoreException User Store Exception.
-     */
+    @Override
     public boolean doPostGetPaginatedUserListWithID(String claimUri, String claimValue, final List<User> returnValues,
             UserStoreManager userStoreManager) throws UserStoreException {
         return true;
     }
 
-    /**
-     * Post listener for the list paginated users method.
-     *
-     * @param filter           username filter.
-     * @param limit            No of search results.
-     * @param offset           start index of the search.
-     * @param returnValues     Values to be returned.
-     * @param userStoreManager User store manager.
-     * @return False if error.
-     * @throws UserStoreException User Store Exception.
-     */
+    @Override
     public boolean doPostListUsersWithID(String filter, int limit, int offset, final List<User> returnValues,
             UserStoreManager userStoreManager) throws UserStoreException {
 
         return true;
     }
 
-    /**
-     * Any additional tasks that need to be done after getting the role list of a user.
-     *
-     * @param userName         Name of the user.
-     * @param filter           Relevant filter.
-     * @param roleList         List of roles.
-     * @param userStoreManager User Store Manager.
-     * @return true if handling succeeds, otherwise false.
-     * @throws UserStoreException User Store Exception
-     */
+    @Override
     public boolean doPostGetRoleListOfUserWithID(String userName, String filter, String[] roleList,
             UserStoreManager userStoreManager) throws UserStoreException {
 
         return true;
     }
 
-    /**
-     * Any additional tasks that need to be done after getting user list a role.
-     *
-     * @param roleName         Name of the role.
-     * @param userList         List of users.
-     * @param userStoreManager User Store Manager.
-     * @return true if handling succeeds, otherwise false.
-     * @throws UserStoreException UserStore Exception.
-     */
+    @Override
     public boolean doPostGetUserListOfRoleWithID(String roleName, User[] userList, UserStoreManager userStoreManager)
             throws UserStoreException {
 
         return true;
     }
 
-    /**
-     * Post listener for get claim values of users
-     *
-     * @param userIDs                user names
-     * @param claims                 claims
-     * @param profileName            profile name
-     * @param userClaimSearchEntries user claim search entries
-     * @return false in case of error
-     * @throws UserStoreException UserStoreException
-     */
+    @Override
     public boolean doPostGetUsersClaimValuesWithID(String[] userIDs, String[] claims, String profileName,
             UserClaimSearchEntry[] userClaimSearchEntries) throws UserStoreException {
 
