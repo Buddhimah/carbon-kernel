@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import static org.wso2.carbon.user.core.UserStoreConfigConstants.RESOLVE_USER_NAME_FROM_USER_ID_CACHE_NAME;
+
 /**
  * This will manage the relationship between the user unique id in the system against the unique id in the user store.
  */
@@ -67,20 +69,26 @@ public class UserUniqueIDManger {
     public User getUser(String uniqueId, AbstractUserStoreManager userStoreManager)
             throws UserStoreException {
 
-        String[] usernames = userStoreManager.getUserList(UserCoreClaimConstants.USER_ID_CLAIM_URI, uniqueId, null);
+        String username = userStoreManager.getCachedUserName(uniqueId);
+        if (username.isEmpty()) {
 
-        if (usernames.length > 1) {
-            throw new UserStoreException("More than one user presents with the same user unique id.");
-        }
+            String[] usernames = userStoreManager.getUserList(UserCoreClaimConstants.USER_ID_CLAIM_URI, uniqueId, null);
 
-        if (usernames.length == 0) {
-            return null;
+            if (usernames.length > 1) {
+                throw new UserStoreException("More than one user presents with the same user unique id.");
+            }
+
+            if (usernames.length == 0) {
+                return null;
+            }
+            username = usernames[0];
+            userStoreManager.addToCachedUserName(uniqueId, username);
         }
 
         User user = new User();
         user.setUserID(uniqueId);
-        user.setUsername(UserCoreUtil.removeDomainFromName(usernames[0]));
-        user.setUserStoreDomain(UserCoreUtil.extractDomainFromName(usernames[0]));
+        user.setUsername(UserCoreUtil.removeDomainFromName(username));
+        user.setUserStoreDomain(UserCoreUtil.extractDomainFromName(username));
         return user;
     }
 

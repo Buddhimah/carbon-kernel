@@ -155,6 +155,7 @@ public abstract class AbstractUserStoreManager implements PaginatedUserStoreMana
 
     private UserUniqueIDManger userUniqueIDManger = new UserUniqueIDManger();
     private UserUniqueIDDomainResolver userUniqueIDDomainResolver;
+    private Map<String,User> simpleUserCache = new HashMap<>();
 
     private void setClaimManager(ClaimManager claimManager) throws IllegalAccessException {
         if (Boolean.parseBoolean(realmConfig.getRealmProperty(UserCoreClaimConstants.INITIALIZE_NEW_CLAIM_MANAGER))) {
@@ -10907,6 +10908,12 @@ public abstract class AbstractUserStoreManager implements PaginatedUserStoreMana
 
         // Check whether roles exist in cache
         User user = userUniqueIDManger.getUser(userID, this);
+//        User user;
+//        if (simpleUserCache.containsKey(userID)){
+//            user = simpleUserCache.get(userID);
+//        } else {
+//            user = userUniqueIDManger.getUser(userID, this);
+//        }
         if (user != null) {
             String[] roleListOfUserFromCache = getRoleListOfUserFromCache(this.tenantId, user.getUsername());
             if (roleListOfUserFromCache != null) {
@@ -11849,6 +11856,18 @@ public abstract class AbstractUserStoreManager implements PaginatedUserStoreMana
             return userName;
         }
         return userName;
+    }
+
+    public String getCachedUserName(String userID) {
+
+        return getFromUserNameCache(userID);
+    }
+
+    public void addToCachedUserName(String userID, String userName) throws UserStoreException {
+
+        UserStore userStore = getUserStoreWithID(userID);
+        addToUserNameCache(userID, userName, userStore);
+        addToUserIDCache(userID, userName, userStore);
     }
 
     private String getFromUserNameCache(String userID) {
