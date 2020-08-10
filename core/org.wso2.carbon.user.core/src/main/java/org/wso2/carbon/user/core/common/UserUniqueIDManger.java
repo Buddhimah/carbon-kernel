@@ -31,8 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static org.wso2.carbon.user.core.UserStoreConfigConstants.RESOLVE_USER_NAME_FROM_USER_ID_CACHE_NAME;
-
 /**
  * This will manage the relationship between the user unique id in the system against the unique id in the user store.
  */
@@ -70,7 +68,7 @@ public class UserUniqueIDManger {
             throws UserStoreException {
 
         String username = userStoreManager.getCachedUserName(uniqueId);
-        if (username.isEmpty()) {
+        if (username == null) {
 
             String[] usernames = userStoreManager.getUserList(UserCoreClaimConstants.USER_ID_CLAIM_URI, uniqueId, null);
 
