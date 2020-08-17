@@ -11148,9 +11148,9 @@ public abstract class AbstractUserStoreManager implements PaginatedUserStoreMana
         }
 
         // Check whether roles exist in cache
-        User user = userUniqueIDManger.getUser(userID, this);
-        if (user != null) {
-            String[] roleListOfUserFromCache = getRoleListOfUserFromCache(this.tenantId, user.getUsername());
+        String userName = this.getUserNameFromUserID(userID);
+        if (StringUtils.isNotEmpty(userName)) {
+            String[] roleListOfUserFromCache = getRoleListOfUserFromCache(this.tenantId, userName);
             if (roleListOfUserFromCache != null) {
                 roleNames = Arrays.asList(roleListOfUserFromCache);
                 if (roleNames.size() > 0) {
@@ -11166,10 +11166,10 @@ public abstract class AbstractUserStoreManager implements PaginatedUserStoreMana
 
         // If unique id feature is not enabled, we have to call the legacy methods.
         if (!isUniqueUserIdEnabledInUserStore(userStore)) {
-            if (user == null) {
+            if (StringUtils.isEmpty(userName)) {
                 return Arrays.asList(realmConfig.getEveryOneRoleName());
             }
-            return Arrays.asList(doGetRoleListOfUser(user.getUsername(), "*"));
+            return Arrays.asList(doGetRoleListOfUser(userName, "*"));
         } else {
             return doGetRoleListOfUserWithID(userID, "*");
         }
