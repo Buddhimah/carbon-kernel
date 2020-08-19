@@ -32,7 +32,11 @@ import org.wso2.carbon.user.core.authorization.JDBCAuthorizationManager;
 import org.wso2.carbon.user.core.common.DefaultRealm;
 import org.wso2.carbon.user.core.common.UserIdResolverCache;
 import static org.wso2.carbon.user.core.UserStoreConfigConstants.RESOLVE_USER_ID_FROM_USER_NAME_CACHE_NAME;
+import static org.wso2.carbon.user.core.UserStoreConfigConstants.RESOLVE_USER_NAME_FROM_UNIQUE_USER_ID_CACHE_NAME;
 import static org.wso2.carbon.user.core.UserStoreConfigConstants.RESOLVE_USER_NAME_FROM_USER_ID_CACHE_NAME;
+import static org.wso2.carbon.user.core.UserStoreConfigConstants.RESOLVE_USER_UNIQUE_ID_FROM_USER_NAME_CACHE_NAME;
+import static org.wso2.carbon.utils.multitenancy.MultitenantConstants.SUPER_TENANT_ID;
+
 import org.wso2.carbon.user.core.config.RealmConfigXMLProcessor;
 import org.wso2.carbon.user.core.config.TestRealmConfigBuilder;
 import org.wso2.carbon.user.core.util.DatabaseUtil;
@@ -60,10 +64,7 @@ public class JDBCRealmWithUniqueIDTest extends BaseTestCase {
     public void testStuff() throws Exception {
 
         DatabaseUtil.closeDatabasePoolConnection();
-        UserIdResolverCache.getInstance()
-                .clear(RESOLVE_USER_ID_FROM_USER_NAME_CACHE_NAME, MultitenantConstants.SUPER_TENANT_ID);
-        UserIdResolverCache.getInstance()
-                .clear(RESOLVE_USER_NAME_FROM_USER_ID_CACHE_NAME, MultitenantConstants.SUPER_TENANT_ID);
+        clearUserIdResolverCache();
         initRealmStuff(TEST_URL);
         doUserStuff();
         doUserRoleStuff();
@@ -303,5 +304,16 @@ public class JDBCRealmWithUniqueIDTest extends BaseTestCase {
                 ClaimTestUtil.HOME_PROFILE_NAME);
         assertNull(obtained.get(ClaimTestUtil.CLAIM_URI2)); // overridden
 
+    }
+
+    private void clearUserIdResolverCache() {
+
+        UserIdResolverCache.getInstance()
+                .clear(RESOLVE_USER_UNIQUE_ID_FROM_USER_NAME_CACHE_NAME, SUPER_TENANT_ID);
+        UserIdResolverCache.getInstance().clear(RESOLVE_USER_NAME_FROM_UNIQUE_USER_ID_CACHE_NAME, SUPER_TENANT_ID);
+        UserIdResolverCache.getInstance()
+                .clear(RESOLVE_USER_ID_FROM_USER_NAME_CACHE_NAME, MultitenantConstants.SUPER_TENANT_ID);
+        UserIdResolverCache.getInstance()
+                .clear(RESOLVE_USER_NAME_FROM_USER_ID_CACHE_NAME, MultitenantConstants.SUPER_TENANT_ID);
     }
 }

@@ -57,13 +57,7 @@ public class AdvancedPermissionTreeWithIDTest extends BaseTestCase {
 
     public void testStuff() throws Exception {
         DatabaseUtil.closeDatabasePoolConnection();
-        UserIdResolverCache.getInstance()
-                .clear(RESOLVE_USER_UNIQUE_ID_FROM_USER_NAME_CACHE_NAME, SUPER_TENANT_ID);
-        UserIdResolverCache.getInstance().clear(RESOLVE_USER_NAME_FROM_UNIQUE_USER_ID_CACHE_NAME, SUPER_TENANT_ID);
-        UserIdResolverCache.getInstance()
-                .clear(RESOLVE_USER_ID_FROM_USER_NAME_CACHE_NAME, MultitenantConstants.SUPER_TENANT_ID);
-        UserIdResolverCache.getInstance()
-                .clear(RESOLVE_USER_NAME_FROM_USER_ID_CACHE_NAME, MultitenantConstants.SUPER_TENANT_ID);
+        clearUserIdResolverCache();
         initRealmStuff();
         admin = realm.getUserStoreManager();
         authMan = realm.getAuthorizationManager();
@@ -148,5 +142,16 @@ public class AdvancedPermissionTreeWithIDTest extends BaseTestCase {
     public void doTestUserRoleCachingInCaseInsensitiveUsername() throws UserStoreException {
         admin.deleteRole("Internal/role1");
         assertFalse(authMan.isUserAuthorized("indunil", "/s/t/u/v/w/x/y", "read"));
+    }
+
+    private void clearUserIdResolverCache() {
+
+        UserIdResolverCache.getInstance()
+                .clear(RESOLVE_USER_UNIQUE_ID_FROM_USER_NAME_CACHE_NAME, SUPER_TENANT_ID);
+        UserIdResolverCache.getInstance().clear(RESOLVE_USER_NAME_FROM_UNIQUE_USER_ID_CACHE_NAME, SUPER_TENANT_ID);
+        UserIdResolverCache.getInstance()
+                .clear(RESOLVE_USER_ID_FROM_USER_NAME_CACHE_NAME, MultitenantConstants.SUPER_TENANT_ID);
+        UserIdResolverCache.getInstance()
+                .clear(RESOLVE_USER_NAME_FROM_USER_ID_CACHE_NAME, MultitenantConstants.SUPER_TENANT_ID);
     }
 }
